@@ -33,3 +33,15 @@ test("completes tasks", async ({ page }) => {
     "line-through"
   );
 });
+
+test("adds a new todo item", async ({ page }) => {
+  await page.goto(HOME);
+  const todoText = "Mow the lawn";
+
+  const newTodo = page.getByPlaceholder("Add todo...");
+  await newTodo.fill(todoText);
+  await newTodo.press("Enter");
+
+  await expect(newTodo).toBeEmpty();
+  await expect(page.getByText(todoText)).toBeVisible();
+});
