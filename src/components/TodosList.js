@@ -1,15 +1,18 @@
 import React from "react";
 import TodoItem from "./TodoItem";
+import { useTodoListContext } from "./useTodoList";
 
-function TodosList({ todos, handleChangeProps, deleteTodoProps }) {
+function TodosList() {
+  const { todos, handleChange, delTodo } = useTodoListContext();
+
   return (
     <div>
       {todos.map((todo) => (
         <TodoItem
           key={todo.id}
           todo={todo}
-          handleChangeProps={handleChangeProps}
-          deleteTodoProps={deleteTodoProps}
+          handleChangeProps={handleChange}
+          deleteTodoProps={delTodo}
         />
       ))}
     </div>

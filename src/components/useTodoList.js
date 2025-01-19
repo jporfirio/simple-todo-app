@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import React, { useMemo, useState, useContext, createContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 const TODOS = [
@@ -21,6 +21,23 @@ const TODOS = [
     completed: false,
   },
 ];
+
+const Context = createContext({});
+
+export function useTodoListContext() {
+  const context = useContext(Context);
+
+  if (!context)
+    throw new Error("useTodoListContext requires a TodoContext.Provider");
+
+  return context;
+}
+
+export function TodoContextProvider({ children }) {
+  const todoList = useTodoList();
+
+  return <Context.Provider value={todoList}>{children}</Context.Provider>;
+}
 
 export default function useTodoList() {
   const [todos, setTodos] = useState(TODOS);

@@ -1,17 +1,20 @@
 import React, { useState, useRef, useCallback } from "react";
+import { useTodoListContext } from "./useTodoList";
 
-function InputTodo({ addTodoProps }) {
+function InputTodo() {
+  const { addTodoItem } = useTodoListContext();
+
   const [title, setTitle] = useState("");
   const inputRef = useRef(null);
 
   const handleSubmit = useCallback(
     (e) => {
       e.preventDefault();
-      addTodoProps(title);
+      addTodoItem(title);
       setTitle("");
       inputRef.current.focus();
     },
-    [title, addTodoProps]
+    [title, addTodoItem]
   );
 
   return (
