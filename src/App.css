@@ -8,6 +8,21 @@ body {
   line-height: 1.4;
   color: #1f1f1f;
 }
+
+.header {
+  padding: 20px 0;
+  line-height: 2em;
+}
+
+.header h1 {
+  font-size: 25px;
+  margin-bottom: 15px;
+}
+
+.header p {
+  font-size: 19px;
+}
+
 .container {
   max-width: 700px;
   margin: 0 auto;
