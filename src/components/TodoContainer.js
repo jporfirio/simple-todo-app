@@ -5,11 +5,28 @@ import InputTodo from "./InputTodo";
 import useTodoList from "./useTodoList";
 
 function TodoContainer() {
-  const { todos, addTodoItem, handleChange, delTodo } = useTodoList();
+  const {
+    todos,
+    addTodoItem,
+    handleChange,
+    delTodo,
+    toggleCompleted,
+    showCompleted,
+  } = useTodoList();
 
   return (
     <div className="container">
-      <Header />
+      <Header>
+        <label>
+          Show completed
+          <input
+            type="checkbox"
+            style={{ marginLeft: "15px" }}
+            checked={showCompleted}
+            onClick={toggleCompleted}
+          />
+        </label>
+      </Header>
       <InputTodo addTodoProps={addTodoItem} />
       <TodosList
         todos={todos}

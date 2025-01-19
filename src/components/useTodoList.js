@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 const TODOS = [
@@ -24,6 +24,13 @@ const TODOS = [
 
 export default function useTodoList() {
   const [todos, setTodos] = useState(TODOS);
+  const [showCompleted, setCompleted] = useState(false);
+  const toggleCompleted = () => setCompleted((c) => !c);
+
+  const filteredTodos = useMemo(
+    () => (showCompleted ? todos : todos.filter((todo) => !todo.completed)),
+    [todos, showCompleted]
+  );
 
   const handleChange = (id) => {
     setTodos((todos) =>
@@ -52,9 +59,11 @@ export default function useTodoList() {
   };
 
   return {
-    todos,
+    todos: filteredTodos,
     handleChange,
     delTodo,
     addTodoItem,
+    toggleCompleted,
+    showCompleted,
   };
 }
